@@ -35,7 +35,7 @@ export default function SignUp() {
     setLoading(false);
     setError(null);
     navigate('/sign-in')
-    alert('User Created Succussfully!')
+    alert('User Created Successfully!')
     } catch (error) {
       setLoading(false);
       setError(error.message)
