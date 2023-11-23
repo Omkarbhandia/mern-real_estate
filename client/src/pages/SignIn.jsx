@@ -37,7 +37,7 @@ export default function SignIn() {
     }
     dispatch(signInSuccess(data));
     navigate('/')
-    alert('Logged In Successfully!')
+    prompt('Logged In Successfully!')
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
