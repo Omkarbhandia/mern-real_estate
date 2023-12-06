@@ -65,7 +65,7 @@ export default function UpdateListing() {
           setImageUploadError(false);
           setUplaoding(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setImageUploadError(
             "Failed to upload Image(size of 1 img must be upto 2MB) "
           );
