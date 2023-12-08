@@ -1,28 +1,28 @@
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function Header() {
-const navigate = useNavigate();
-const {currentUser} = useSelector(state => state.user);
-const [searchTerm, setSearchTerm] = useState('');
- const handleSubmit = (e) =>{
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('searchTerm', searchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
- }
+  };
 
- useEffect(()=>{
-  const urlParams = new URLSearchParams(location.search);
-  const searchTermUrl = urlParams.get('searchTerm');
-  if(searchTermUrl) {
-    setSearchTerm(searchTermUrl);
-  }
- },[location.search])
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermUrl = urlParams.get("searchTerm");
+    if (searchTermUrl) {
+      setSearchTerm(searchTermUrl);
+    }
+  }, [location.search]);
 
   return (
     <header className="bg-slate-200 shadow-md">
@@ -34,14 +34,19 @@ const [searchTerm, setSearchTerm] = useState('');
           </h1>
         </Link>
 
-        <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-100 p-3 rounded-lg flex items-center"
+        >
           <input
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
             value={searchTerm}
-            onChange={(e)=> {setSearchTerm(e.target.value)}}
-          /> 
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
           <button>
             <FaSearch className="text-slate-800" />
           </button>
@@ -58,10 +63,15 @@ const [searchTerm, setSearchTerm] = useState('');
             </li>
           </Link>
           <Link to="/profile">
-        {currentUser ? (
-          <img className ="rounded-full h-8 w-8 object-cover" src={currentUser.avatar} alt="profile" />
-        ) : (<li className="text-slate-700 hover:underline"> Sign In</li>
-        )}
+            {currentUser ? (
+              <img
+                className="rounded-full h-8 w-8 object-cover"
+                src={currentUser.avatar}
+                alt="profile"
+              />
+            ) : (
+              <li className="text-slate-700 hover:underline"> Sign In</li>
+            )}
           </Link>
         </ul>
       </div>
