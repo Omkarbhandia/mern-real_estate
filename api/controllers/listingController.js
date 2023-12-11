@@ -13,7 +13,7 @@ export const createListing = async(req, res, next) =>{
 export const deleteListing = async(req,res,next)=> {
     const listing = await Listing.findById(req.params.id);
     if (!listing) {
-        return next(errorHandler(401, 'Lisiting Does not Exist'));
+        return next(errorHandler(401, 'Listing Does not Exist'));
     }
 
     if(req.user.id !== listing.userRef){
@@ -44,17 +44,17 @@ export const updateListing = async (req, res, next) => {
             req.body,
             { new: true}
         );
-        res.status(200).json(updatedlisting)
+        res.status(200).json(updatedlisting);
     } catch (error) {
-        next(error)
+        next(error);
     }
-}
+};
 
 export const getListing = async(req, res, next) =>{
     try {
         const listing = await Listing.findById(req.params.id);
         if (!listing) {
-            return next(errorHandler(401, 'Lisiting Does not Exist'));
+            return next(errorHandler(401, 'Listing Does not Exist'));
         }  
         res.status(200).json(listing); 
     } catch (error) {

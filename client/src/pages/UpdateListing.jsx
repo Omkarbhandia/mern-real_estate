@@ -7,13 +7,14 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 
-export default function UpdateListing() {
+export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const params = useParams();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: "",
@@ -33,20 +34,21 @@ export default function UpdateListing() {
   const [submitError, setSubmitError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchListing = async () => {
-        const listingId = params.listingId;
-        const res = await fetch(`/api/listing/get/${listingId}`);
-        const data = await res.json();
-        if(data.success === false){
-            console.log(data.message);
-            return;
-        }
-        setFormData(data);
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setFormData(data);
     };
+
     fetchListing();
-  },[]);
-  
+  }, []);
+
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUplaoding(true);
@@ -150,16 +152,16 @@ export default function UpdateListing() {
       setLoading(true);
       setSubmitError(false);
       const res = await fetch(`/api/listing/update/${params.listingId}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
           userRef: currentUser._id,
         }),
       });
-      const data = res.json();
+      const data = await res.json();
       setLoading(false);
       if (data.success === false) {
         setSubmitError(data.message);
@@ -294,8 +296,8 @@ export default function UpdateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
-                {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
+                {formData.type === "rent" && (
+                  <span className="text-xs">(₹ / month)</span>
                 )}
               </div>
             </div>
@@ -312,9 +314,9 @@ export default function UpdateListing() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
-                  {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
-                )}
+                  {formData.type === "rent" && (
+                    <span className="text-xs">₹ / month</span>
+                  )}
                 </div>
               </div>
             )}

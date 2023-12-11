@@ -9,11 +9,10 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 
-
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
   const [files, setFiles] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: "",
@@ -136,22 +135,22 @@ export default function CreateListing() {
         );
       setLoading(true);
       setSubmitError(false);
-      const res = await fetch("/api/listing/create", {
-        method: "POST",
+      const res = await fetch('/api/listing/create', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: JSON.stringify({                   
           ...formData,
           userRef: currentUser._id,
         }),
       });
-      const data = res.json();
+      const data = await res.json();
       setLoading(false);
       if (data.success === false) {
         setSubmitError(data.message);
       }
-      navigate(`/listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setSubmitError(error.message);
       setLoading(false);
@@ -283,8 +282,8 @@ export default function CreateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
-                {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
+                {formData.type === "rent" && (
+                  <span className="text-xs">(₹ / month)</span>
                 )}
               </div>
             </div>
@@ -301,9 +300,9 @@ export default function CreateListing() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
-                  {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
-                )}
+                  {formData.type === "rent" && (
+                    <span className="text-xs">(₹ / month)</span>
+                  )}
                 </div>
               </div>
             )}
@@ -355,7 +354,10 @@ export default function CreateListing() {
                 </button>
               </div>
             ))}
-          <button disabled={loading || uploading } className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+          <button
+            disabled={loading || uploading}
+            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          >
             {loading ? "Creating..." : "Create Listing"}
           </button>
           {submitError && <p className="text-red-700">{submitError}</p>}

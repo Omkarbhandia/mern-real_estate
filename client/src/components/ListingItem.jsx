@@ -27,8 +27,8 @@ export default function ListingItem({ listing }) {
           <p className="text-slate-500 mt-2 font-semibold  ">
             ₹
             {listing.offer
-              ? listing.discountedPrice.toLocaleString("en-US")
-              : listing.regularPrice.toLocaleString("en-US")}
+              ? listing.discountedPrice.toLocaleString("en-IN")
+              : listing.regularPrice.toLocaleString("en-IN")}
             {listing.type === "rent" && "/month"}
           </p>
           <div className="flex  gap-6 text-slate-700">

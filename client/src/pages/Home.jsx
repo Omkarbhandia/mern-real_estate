@@ -95,10 +95,10 @@ export default function Home() {
         {offerListings && offerListings.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-3xl font-semibold text-slate-600 px-20">Recent Offers</h2>
-              <Link className="text-lg text-blue-800 hover:underline px-20" to={"/search?offer=true"}>Show more offers</Link>
+              <h2 className="text-3xl font-semibold text-slate-600 px-5 md:px-20">Recent Offers</h2>
+              <Link className="text-lg text-blue-800 hover:underline px-5 md:px-20" to={"/search?offer=true"}>Show more offers</Link>
             </div>
-            <div className="flex flex-wrap gap-20 px-20">
+            <div className="flex flex-wrap px-5 gap-3 md:gap-20 md:px-20">
               {offerListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -109,10 +109,10 @@ export default function Home() {
         {saleListings && saleListings.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-3xl font-semibold text-slate-600 px-20">Recent places for sale</h2>
-              <Link className="text-lg text-blue-800 hover:underline px-20" to={"/search?type=sale"}>Show more places for sale</Link>
+              <h2 className="text-3xl font-semibold text-slate-600 px-5 md:px-20">Recent places for sale</h2>
+              <Link className="text-lg text-blue-800 hover:underline px-5 md:px-20" to={"/search?type=sale"}>Show more places for sale</Link>
             </div>
-            <div className="flex flex-wrap gap-20 px-20">
+            <div className="flex flex-wrap px-5 gap-3 md:gap-20 md:px-20">
               {saleListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -123,10 +123,10 @@ export default function Home() {
         {rentListings && rentListings.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-3xl font-semibold text-slate-600 px-20">Recent places for Rent</h2>
-              <Link className="text-lg text-blue-800 hover:underline px-20" to={"/search?type=rent"}>Show more places for rent</Link>
+              <h2 className="text-3xl font-semibold text-slate-600 px-5 md:px-20">Recent places for Rent</h2>
+              <Link className="text-lg text-blue-800 hover:underline px-5 md:px-20" to={"/search?type=rent"}>Show more places for rent</Link>
             </div>
-            <div className="flex flex-wrap gap-20 px-20">
+            <div className="flex flex-wrap px-5 gap-3 md:gap-20 md:px-20">
               {rentListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
